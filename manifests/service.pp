@@ -8,26 +8,23 @@ class wemo::service {
   case $wemo::ensure {
     'present', 'running', 'enabled': {
       # Ensure the service is enabled and running
-      service { 'wanemd':
-        ensure => running,
-        enable => true,
+      if $wemo::install_service {
+        service { 'wanemd':
+          ensure => running,
+          enable => true,
+        }
       }
     }
     'stopped': {
       # Ensure the service is stopped and disabled
-      service { 'wanemd':
-        ensure => stopped,
-        enable => true,
+      if $wemo::install_service {
+        service { 'wanemd':
+          ensure => stopped,
+          enable => true,
+        }
       }
     }
-    'disabled': {
-      # Ensure the service is stopped and disabled
-      service { 'wanemd':
-        ensure => stopped,
-        enable => false,
-      }
-    }
-    'absent': {
+    'disabled', 'absent': {
       # Ensure the service is stopped and disabled
       service { 'wanemd':
         ensure => stopped,
