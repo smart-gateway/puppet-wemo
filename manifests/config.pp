@@ -29,7 +29,13 @@ class wemo::config {
       if $wemo::install_service {
         file { '/etc/wanemd/wanemd.yaml':
           ensure  => file,
-          content => epp('wemo/wanemd.yaml.epp'),
+          content => epp('wemo/wanemd.yaml.epp', {
+              'uplink_interface'       => $wemo::uplink_interface,
+              'downlink_interface'     => $wemo::downlink_interface,
+              'bridge_name'            => $wemo::bridge_name,
+              'line_rate'              => $wemo::line_rate,
+              'flush_iptables_forward' => $wemo::flush_iptables_forward,
+          }),
           mode    => '0644',
         }
 
