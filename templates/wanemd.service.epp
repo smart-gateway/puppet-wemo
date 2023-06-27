@@ -1,0 +1,20 @@
+[Unit]
+Description=Wanemd Service Daemon
+ConditionPathExists=/opt/wanemd/bin/wanemd
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+Restart=on-failure
+RestartSec=10
+StartLimitInterval=60
+WorkingDirectory=/opt/wanemd/bin
+ExecStart=/opt/wanemd/bin/wanemd
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=wanemd
+
+[Install]
+WantedBy=multi-user.target
