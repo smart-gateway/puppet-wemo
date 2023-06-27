@@ -1,5 +1,5 @@
 <%- | String $uplink_interface,
-      String $downlink_interace,
+      String $downlink_interface,
       String $bridge_name,
       String $line_rate,
       Boolean $flush_iptables_forward
@@ -14,7 +14,7 @@ grpc_port: 6201
 # These are the uplink and downlink interfaces used for bridging traffic. These are the interfaces to which the shaping
 # will be applied.
 ul_interface: <%= $uplink_interface %>
-dl_interface: <%= $downlink_interace %>
+dl_interface: <%= $downlink_interface %>
 
 # This is the name of the bridge interface that bridges traffic between the two ports listed above.
 bridge_name: <%= $bridge_name %>
