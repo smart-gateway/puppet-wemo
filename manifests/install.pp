@@ -57,7 +57,7 @@ class wemo::install {
     }
     'absent': {
       # Remove directories and files if present
-      file { ['/opt/wanemd/bin', '/etc/wanemd']:
+      file { ['/opt/wanemd/bin', '/opt/wanemd', '/etc/wanemd']:
         ensure => absent,
         force  => true,
       }
