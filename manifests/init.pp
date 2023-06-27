@@ -57,16 +57,16 @@ class wemo (
   validate_string($uplink_interface)
   validate_string($downlink_interface)
 
-  # Ensure that the interfaces are valid on the system.
-  $available_interfaces = $facts['networking']['interfaces'].keys
+  # # Ensure that the interfaces are valid on the system.
+  # $available_interfaces = $facts['networking']['interfaces'].keys
 
-  if !($available_interfaces.include?($uplink_interface)) {
-    fail("Invalid value for uplink_interface: '${uplink_interface}'. The specified interface does not exist.")
-  }
+  # if !($available_interfaces.include?($uplink_interface)) {
+  #   fail("Invalid value for uplink_interface: '${uplink_interface}'. The specified interface does not exist.")
+  # }
 
-  if !($available_interfaces.include?($downlink_interface)) {
-    fail("Invalid value for downlink_interface: '${downlink_interface}'. The specified interface does not exist.")
-  }
+  # if !($available_interfaces.include?($downlink_interface)) {
+  #   fail("Invalid value for downlink_interface: '${downlink_interface}'. The specified interface does not exist.")
+  # }
 
   # Ensure class declares subordinate classes
   contain wemo::install
@@ -77,46 +77,4 @@ class wemo (
   Class['wemo::install']
   -> Class['wemo::config']
   -> Class['wemo::service']
-
-  case $ensure {
-    'present': {
-      # Logic to ensure the resource is present or installed
-      notify { 'Wemo is present': }
-      # Add resource declarations or code as needed
-    }
-
-    'absent': {
-      # Logic to ensure the resource is absent or removed
-      notify { 'Wemo is absent': }
-      # Add resource declarations or code as needed
-    }
-
-    'running': {
-      # Logic to ensure the service or process is running
-      notify { 'Wemo is running': }
-      # Add resource declarations or code as needed
-    }
-
-    'stopped': {
-      # Logic to ensure the service or process is stopped
-      notify { 'Wemo is stopped': }
-      # Add resource declarations or code as needed
-    }
-
-    'enabled': {
-      # Logic to ensure the service or resource is enabled
-      notify { 'Wemo is enabled': }
-      # Add resource declarations or code as needed
-    }
-
-    'disabled': {
-      # Logic to ensure the service or resource is disabled
-      notify { 'Wemo is disabled': }
-      # Add resource declarations or code as needed
-    }
-
-    default: {
-      fail("Invalid value for ensure: '${ensure}'.")
-    }
-  }
 }
